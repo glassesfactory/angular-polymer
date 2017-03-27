@@ -12,11 +12,11 @@ import {
 } from '@angular/core';
 import { FormControlName, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { __platform_browser_private__ } from '@angular/platform-browser';
+import { ɵBrowserDomAdapter as BrowserDomAdapter, ɵsetRootDomAdapter as setRootDomAdapter } from '@angular/platform-browser';
 
 const Polymer:any = (<any>window).Polymer;
 
-class PolymerDomAdapter extends __platform_browser_private__.BrowserDomAdapter {
+class PolymerDomAdapter extends BrowserDomAdapter {
   createStyleElement(css:any, doc:Document = document) {
     var style:any = doc.createElement.call(doc, 'style', 'custom-style');
     this.appendChild(style, this.createTextNode(css));
@@ -59,9 +59,9 @@ class PolymerShadyDomAdapter extends PolymerDomAdapter {
 }
 
 if (Polymer.Settings.useShadow) {
-  __platform_browser_private__.setRootDomAdapter(new PolymerDomAdapter());
+  setRootDomAdapter(new PolymerDomAdapter());
 } else {
-  __platform_browser_private__.setRootDomAdapter(new PolymerShadyDomAdapter());
+  setRootDomAdapter(new PolymerShadyDomAdapter());
 }
 
 
